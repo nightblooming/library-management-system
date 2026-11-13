@@ -1,0 +1,6 @@
+$kind: http-request
+url: http://localhost:3000/books?search=dune
+method: GET
+queryParams:
+  search: dune
+order: 1000

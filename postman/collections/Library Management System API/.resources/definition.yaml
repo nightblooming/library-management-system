@@ -1,0 +1,14 @@
+$kind: collection
+variables:
+  - key: baseUrl
+    value: ""
+    disabled: false
+  - key: librarianToken
+    value: ""
+    disabled: false
+  - key: patronToken
+    value: ""
+    disabled: false
+  - key: json_web_token_06yc
+    secret: true
+    disabled: false

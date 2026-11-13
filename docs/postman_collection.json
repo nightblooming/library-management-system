@@ -1,0 +1,166 @@
+{
+  "info": {
+    "name": "Library Management System API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    { "key": "baseUrl", "value": "http://localhost:3000" },
+    { "key": "librarianToken", "value": "" },
+    { "key": "patronToken", "value": "" }
+  ],
+  "item": [
+    {
+      "name": "Auth",
+      "item": [
+        {
+          "name": "Register Librarian",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"librarian@library.com\",\n  \"password\": \"password123\",\n  \"name\": \"Head Librarian\",\n  \"role\": \"LIBRARIAN\"\n}"
+            },
+            "url": "{{baseUrl}}/auth/register"
+          }
+        },
+        {
+          "name": "Register Patron",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"patron@library.com\",\n  \"password\": \"password123\",\n  \"name\": \"Regular Reader\"\n}"
+            },
+            "url": "{{baseUrl}}/auth/register"
+          }
+        },
+        {
+          "name": "Login",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"librarian@library.com\",\n  \"password\": \"password123\"\n}"
+            },
+            "url": "{{baseUrl}}/auth/login"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Genres",
+      "item": [
+        {
+          "name": "Create Genre",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Historical Fiction\"\n}"
+            },
+            "url": "{{baseUrl}}/genres"
+          }
+        },
+        {
+          "name": "Get All Genres",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}/genres"
+          }
+        },
+        {
+          "name": "Get Genre By ID",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}/genres/1"
+          }
+        },
+        {
+          "name": "Update Genre",
+          "request": {
+            "method": "PATCH",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Sci-Fi & Cyberpunk\"\n}"
+            },
+            "url": "{{baseUrl}}/genres/1"
+          }
+        },
+        {
+          "name": "Delete Genre",
+          "request": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/genres/5"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Books",
+      "item": [
+        {
+          "name": "Get All Books (Paginated & Filtered)",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}/books?genreId=1&search=dune&page=1&limit=10"
+          }
+        },
+        {
+          "name": "Get Book By ID",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}/books/1"
+          }
+        },
+        {
+          "name": "Create Book (Librarian)",
+          "request": {
+            "method": "POST",
+            "auth": {
+              "type": "bearer",
+              "bearer": [{ "key": "token", "value": "{{librarianToken}}", "type": "string" }]
+            },
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"title\": \"Project Hail Mary\",\n  \"author\": \"Andy Weir\",\n  \"isbn\": \"9780593135204\",\n  \"totalCopies\": 4,\n  \"genreId\": 1\n}"
+            },
+            "url": "{{baseUrl}}/books"
+          }
+        },
+        {
+          "name": "Update Book (Librarian)",
+          "request": {
+            "method": "PATCH",
+            "auth": {
+              "type": "bearer",
+              "bearer": [{ "key": "token", "value": "{{librarianToken}}", "type": "string" }]
+            },
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"totalCopies\": 10\n}"
+            },
+            "url": "{{baseUrl}}/books/1"
+          }
+        },
+        {
+          "name": "Delete Book (Librarian)",
+          "request": {
+            "method": "DELETE",
+            "auth": {
+              "type": "bearer",
+              "bearer": [{ "key": "token", "value": "{{librarianToken}}", "type": "string" }]
+            },
+            "url": "{{baseUrl}}/books/1"
+          }
+        }
+      ]
+    }
+  ]
+}

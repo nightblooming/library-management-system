@@ -1,0 +1,11 @@
+$kind: http-request
+url: "{{baseUrl}}/books/16"
+method: PATCH
+body:
+  type: json
+  content: '{"totalCopies": 10}'
+auth:
+  type: bearer
+  credentials:
+    token: "{{json_web_token_06yc}}"
+order: 1000
